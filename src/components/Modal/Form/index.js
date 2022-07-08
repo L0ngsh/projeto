@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input } from "@mui/material";
 import Modal from "..";
+import { dateParser } from "../../../Utils/date";
 
 const FormModal = ({
     item = null,
@@ -17,7 +18,6 @@ const FormModal = ({
     useEffect(() => {
         if (item !== null) setIsEditing(true);
     }, [item]);
-
 
     if (show) {
         return (
@@ -48,7 +48,7 @@ const FormModal = ({
                             
                         <div className="modal-form-input">
                             <label htmlFor="title">Título</label>
-                            <Input value={isEditing? item.createdAt: new Date().toISOString()} id="createdAt"/>
+                            <Input value={dateParser(isEditing? item.createdAt: new Date().toISOString())} id="createdAt"/>
                         </div>
                     </div>
                     <div className="modal-actions">

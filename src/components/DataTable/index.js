@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteModal from "../Modal/Delete";
 import FormModal from "../Modal/Form";
 import * as db from '../../Utils/db';
+import { dateParser } from "../../Utils/date";
 
 const DataTable = ({rows}) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -17,8 +18,16 @@ const DataTable = ({rows}) => {
     const columns = [
         { field: 'id', headerName: 'ID', disablePadding: true, minWidth: 100 },
         { field: 'title', headerName: 'Title', disablePadding: true, minWidth: 200 },
-        { field: 'createdAt', headerName: 'Created At', disablePadding: true, minWidth: 200 },
         { field: 'description', headerName: 'Description', disablePadding: true, minWidth: 400 },
+        {
+            field: 'createdAt',
+            headerName: 'Created At',
+            disablePadding: true,
+            minWidth: 200,
+            renderCell: (params) => {
+                return dateParser(params.row.createdAt);
+            }
+        },
         {
             field: 'action',
             headerName: 'Actions',
